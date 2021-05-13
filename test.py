@@ -33,11 +33,14 @@ class Question:
         return val == self.value
 
 
+def class_counts(rows):
+    pass
+
 class Leaf:
     """ A Leaf node classifies data. """
 
     def __init__(self, rows) -> None:
-        self.prediction = None
+        self.prediction = class_counts(rows)
 
 
 class Decision_Node:
@@ -48,11 +51,35 @@ class Decision_Node:
         self.true_branch = true_branch
         self.false_branch = false_branch
 
+def find_best_split(self):
+    """ 
+    Find the best question to ask by iterating over every feature
+    and calculating the information gain
+    """
 
+def partition(rows, question):
+    pass
 
 def build_tree(rows):
     """ Builds the tree. """
 
+    gain, question = find_best_split(rows)
+
+
+    # Condition Stop.
+    # We can ask no further question.
+    if gain == 0: return Leaf(rows)
+
+
+    true_rows, false_rows = partition(rows, question)
+
+    # Recursive the true_branch
+    true_branch = build_tree(true_rows)
+
+    # Recursive the false_branch
+    false_branch = build_tree(false_branch)
+
+    return Decision_Node(question, true_branch, false_branch)
 
 if __name__ == '__main__':
 
