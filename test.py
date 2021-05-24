@@ -32,9 +32,16 @@ class Question:
             return val > self.value
         return val == self.value
 
+    def __repr__(self):
+        condition = "=="
+        if isinstance(self.value, int) or isinstance(self.value, float):
+            condition = ">="
+        return "Is %s %s %s?" % (header[self.column], condition, str(self.value))
+
 
 def class_counts(rows):
     pass
+
 
 class Leaf:
     """ A Leaf node classifies data. """
@@ -51,25 +58,34 @@ class Decision_Node:
         self.true_branch = true_branch
         self.false_branch = false_branch
 
-def find_best_split(self):
+
+def find_best_split(rows):
     """ 
     Find the best question to ask by iterating over every feature
     and calculating the information gain
     """
+    best_gain = 0
+    best_question = None
+
+    for column in rows:
+        print('test %s' % column)
+
+    return best_gain, best_question
+
 
 def partition(rows, question):
-    pass
+    return None, None
+
 
 def build_tree(rows):
     """ Builds the tree. """
 
     gain, question = find_best_split(rows)
 
-
     # Condition Stop.
     # We can ask no further question.
-    if gain == 0: return Leaf(rows)
-
+    if gain == 0:
+        return Leaf(rows)
 
     true_rows, false_rows = partition(rows, question)
 
@@ -77,9 +93,10 @@ def build_tree(rows):
     true_branch = build_tree(true_rows)
 
     # Recursive the false_branch
-    false_branch = build_tree(false_branch)
+    false_branch = build_tree(false_rows)
 
     return Decision_Node(question, true_branch, false_branch)
+
 
 if __name__ == '__main__':
 
@@ -94,4 +111,8 @@ if __name__ == '__main__':
         ['Yellow', 3, 'Lemon'],
     ]
 
-    print(testing_data)
+    # print(testing_data)
+    print(Question(0, 'Green'))
+    print(Question(1, 3))
+
+
